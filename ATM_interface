@@ -1,1 +1,120 @@
+//ATM interaface using java!
+
+import java.util.ArrayList;
+import java.util.Scanner;
+class ATMInterface
+{
+    private int balance;
+    private Scanner scanner;
+    private ArrayList<String> transactionHistory;
+
+    public ATMInterface()
+    {
+        balance = 10000;
+        scanner = new Scanner(System.in);
+        transactionHistory = new ArrayList<>();
+    }
+
+    public void displayoptions()
+    {
+        System.out.println("\n*****ATM Interface*****");
+        System.out.println("=======================");
+        System.out.println("Choose an option:");
+        System.out.println("1. Withdraw");
+        System.out.println("2. Transaction History");
+        System.out.println("3. Deposit");
+        System.out.println("4. Transfer");
+        System.out.println("5. Exit");
+    }
+
+    public void withdraw() {
+        System.out.println("\nEnter the amount to withdraw:");
+        int amount = scanner.nextInt();
+
+        if (amount <= balance)
+        {
+            balance -= amount;
+            transactionHistory.add("Withdraw: " + amount);//adding withdraw amunt to list
+            System.out.println("Withdrawal successful!");
+            System.out.println("Account Balance: "+balance);
+        } else {
+            System.out.println("Insufficient funds!");
+            System.out.println("Account Balance: "+balance);
+        }
+    }
+
+    public void transactionHistory() {
+        System.out.println("\nTransaction History:");
+        for (String transaction : transactionHistory) {
+            System.out.println(transaction);
+        }
+    }
+
+    public void deposit_Money() {
+        System.out.println("\nEnter the amount to deposit: ");
+        int amount = scanner.nextInt();
+
+        balance += amount;
+        transactionHistory.add("Deposit: " + amount);
+        System.out.println("Deposit successful!");
+        System.out.println("Account Balance: "+balance);
+
+    }
+
+    public void transfer()
+    {
+        System.out.println("\nEnter the account number to transfer to: ");
+        String accountNumber = scanner.next();
+
+        System.out.println("Enter the amount to transfer:");
+        int amount = scanner.nextInt();
+
+        if (amount <= balance) {
+            balance -= amount;
+            transactionHistory.add("Transfer to " + accountNumber + ": " + amount);
+            System.out.println("Transfer successful!");
+            System.out.println("Account Balance: "+balance);
+        } else {
+            System.out.println("Insufficient funds for the transfer!");
+            System.out.println("Account Balance: "+balance);
+        }
+    }
+
+    public void exit() {
+        System.out.println("\n*****Thank you for using the ATM!*****");
+        System.exit(0);
+    }
+
+    public void start()
+    {
+        while (true) {
+            displayoptions();
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    withdraw();
+                    break;
+                case 2:
+                    transactionHistory();
+                    break;
+                case 3:
+                    deposit_Money();
+                    break;
+                case 4:
+                    transfer();
+                    break;
+                case 5:
+                    exit();
+                    break;
+                default:
+                    System.out.println("Invalid choice!");
+            }
+        }
+    }
+    public static void main(String[] args) {
+        ATMInterface atmInterface = new ATMInterface();
+        atmInterface.start();
+    }
+}
 
