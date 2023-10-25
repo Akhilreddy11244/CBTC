@@ -1,4 +1,4 @@
-/*The program generates a random number between 1 and 504.
+/*The program generates a random number between 1 and 100.
 The user is prompted to enter a guess.
 The program tells the user if their guess is too high or too low.
 The program continues until the user guesses correctly.
